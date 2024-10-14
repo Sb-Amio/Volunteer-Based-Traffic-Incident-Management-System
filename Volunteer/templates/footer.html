@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Main Page</title>
+    <style>
+        /* Basic reset */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Main content area to grow and push footer down */
+        .content {
+            flex: 1; /* Allows this section to grow */
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50   ;
+            padding: 10px 0; /* Adjusted bottom padding */
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            position: relative;
+            overflow: hidden; /* Hide overflow for the wave animation */
+            border-top-left-radius: 0px; /* Rounded corners for top */
+            border-top-right-radius: 0px;
+            box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icons a:hover {
+            color: #0056b3;
+            box-shadow: 0px 0px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .footer-text {
+            font-size: 16px;
+            color: #fdfefe;
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: #fdfefe;
+            margin-top: 30px;
+        }
+
+        /* Custom Styling */
+        footer:before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: 0;
+            width: 100%;
+            height: 6px; /* Increased height for better visibility */
+            background-color: #007bff;
+            border-radius: 3px 3px 0 0;
+            animation: waveAnimation 2s linear infinite alternate; /* Adjust animation duration and timing */
+        }
+
+        footer .social-icons a i {
+            font-size: 24px;
+        }
+
+        footer .footer-text {
+            margin-bottom: 10px;
+        }
+
+        /* Decorative Elements */
+        .decorative-line {
+            width: 100%;
+            height: 1px;
+            background-color: #dcdcdc;
+            margin: 20px 0;
+        }
+
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" fill="#f0f0f0"/><rect x="50" y="50" width="50" height="50" fill="#f0f0f0"/><rect width="50" height="50" fill="#ffffff"/><rect x="50" y="50" width="50" height="50" fill="#ffffff"/></svg>');
+            opacity: 0.1;
+            pointer-events: none; /* Prevent interaction with the pattern */
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #2c3e50 ;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main content area (add your content here) -->
+<div class="content">
+    <!-- Content goes here -->
+</div>
+
+<footer>
+    <div class="pattern-bg"></div> <!-- Patterned background -->
+    <div class="container" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="footer-text">Connect with us</p>
+                <p class="footer-text" style="color: #aab7b8;">&copy; 2024 <strong>ROAID</strong>. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" onclick="scrollToTop()">&#8593;</button>
+
+<script>
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
