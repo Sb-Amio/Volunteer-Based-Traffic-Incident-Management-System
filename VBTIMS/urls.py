@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from Volunteer import views as v_views
 
 urlpatterns = [
@@ -25,3 +27,4 @@ urlpatterns = [
     path('onaction/', v_views.onaction, name='onaction'),
     path('noaction/', v_views.noaction, name='noaction'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
