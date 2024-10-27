@@ -7,7 +7,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incident List</title>
-    <style>
+</head>
+<body>
+    <div class="container">
+        <h1></h1>
+
+        <!-- Loop over incidents -->
+        {% for incident in incidents %}
+        <!-- Incident Card -->
+        <div class="incident-card">
+            <h4><div class="incident-header">{{ incident.title }}</div></h4>
+            <div class="incident-details">
+                <h5><p><strong>Date Reported:</strong> {{ incident.date_reported }}</p></h5>
+                <h5><p><strong>Status:</strong> {{ incident.status }}</p></h5>
+                <h5><p><strong>Location:</strong> {{ incident.location }}</p></h5>
+                <h5><p><strong>Reported By:</strong> {{ incident.reported_by }}</p></h5>
+            </div>
+            <div class="incident-description"><h5><p><strong>Description:</strong></p></h5>
+                {{ incident.description }}
+            </div>
+            <div class="incident-image-container">
+                {% if incident.image %}
+                    <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
+                {% else %}
+                    <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
+                {% endif %}
+                <div class="button-container">
+                    <button class="incident-button">Edit</button>
+                    <button class="delete-button">Delete</button>
+                    <!--<button class="incident-button">View</button>-->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
+        <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -171,41 +208,5 @@
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1></h1>
-
-        <!-- Loop over incidents -->
-        {% for incident in incidents %}
-        <!-- Incident Card -->
-        <div class="incident-card">
-            <h4><div class="incident-header">{{ incident.title }}</div></h4>
-            <div class="incident-details">
-                <h5><p><strong>Date Reported:</strong> {{ incident.date_reported }}</p></h5>
-                <h5><p><strong>Status:</strong> {{ incident.status }}</p></h5>
-                <h5><p><strong>Location:</strong> {{ incident.location }}</p></h5>
-                <h5><p><strong>Reported By:</strong> {{ incident.reported_by }}</p></h5>
-            </div>
-            <div class="incident-description"><h5><p><strong>Description:</strong></p></h5>
-                {{ incident.description }}
-            </div>
-            <div class="incident-image-container">
-                {% if incident.image %}
-                    <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
-                {% else %}
-                    <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
-                {% endif %}
-                <div class="button-container">
-                    <button class="incident-button">Edit</button>
-                    <button class="delete-button">Delete</button>
-                    <!--<button class="incident-button">View</button>-->
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
 
 {% endblock %}

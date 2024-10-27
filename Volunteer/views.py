@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from Volunteer.models import Incident
+from .forms import *
 
 
 # Create your views here.
@@ -17,3 +18,17 @@ def onaction(request):
 
 def noaction(request):
     return render(request, 'noaction.html')
+
+def selectMode(request):
+    return render(request, 'selectMode.html')
+
+def add_incident(request):
+    form = IncidentForm()
+    if request.method == 'POST':
+        form = IncidentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('homepage')
+
+    context = {'form': form}
+    return render(request, template_name='add_incident.html', context=context)

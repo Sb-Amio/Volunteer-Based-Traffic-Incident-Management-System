@@ -26,5 +26,8 @@ urlpatterns = [
     path('my_events/', v_views.my_events, name='my_events'),
     path('onaction/', v_views.onaction, name='onaction'),
     path('noaction/', v_views.noaction, name='noaction'),
+    path('selectMode/', v_views.selectMode, name='selectMode'),
+    path('add_incident/', v_views.add_incident, name='add_incident'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
