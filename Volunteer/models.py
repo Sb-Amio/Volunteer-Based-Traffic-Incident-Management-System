@@ -5,16 +5,16 @@ from django.contrib.auth.models import User
 
 class Incident(models.Model):
     STATUS_CHOICES = [
-        ('no action', 'no action'),
-        ('on action', 'On action'),
-        ('completed', 'completed'),
+        ('no action', 'No Action'),
+        ('on action', 'On Action'),
+        ('completed', 'Completed'),
     ]
 
     title = models.CharField(max_length=200)
     description = models.TextField()
     location = models.CharField(max_length=255)
     date_reported = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='no action')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='No Action')
     reported_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_incidents')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
                                     related_name='assigned_incidents')

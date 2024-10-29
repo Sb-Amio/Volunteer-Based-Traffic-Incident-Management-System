@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from Volunteer.models import Incident
+from .models import Incident
 from .forms import *
 
 
@@ -14,13 +14,20 @@ def my_events(request):
     return render(request, 'my_events.html')
 
 def onaction(request):
-    return render(request, 'onaction.html')
+    inc = Incident.objects.filter(status='On action')
+    context = {'inc': inc}
+    return render(request, 'onaction.html', context=context)
 
 def noaction(request):
-    return render(request, 'noaction.html')
+    inc = Incident.objects.filter(status='no action')
+    context = {'inc': inc}
+    return render(request, 'noaction.html', context)
 
 def selectMode(request):
     return render(request, 'selectMode.html')
+
+def about_us(request):
+    return render(request, 'about_us.html')
 
 def add_incident(request):
     form = IncidentForm()
@@ -30,5 +37,24 @@ def add_incident(request):
             form.save()
             return redirect('homepage')
 
+    context = {'form': form}
+    return render(request, template_name='add_incident.html', context=context)
+
+def delete_incident(request, id):
+    delete_inc = Incident.objects.get(pk=id)
+    if request.method == 'POST':
+        delete_inc.delete()
+        return redirect('homepage')
+
+
+
+def edit_incident(request, id):
+    inc = Incident.objects.get(pk=id)
+    form = IncidentForm(instance=inc)
+    if request.method == 'POST':
+        form = IncidentForm(request.POST, request.FILES, instance=inc)
+        if form.is_valid():
+            form.save()
+            return redirect('homepage')
     context = {'form': form}
     return render(request, template_name='add_incident.html', context=context)

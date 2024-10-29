@@ -10,33 +10,30 @@
 </head>
 <body>
     <div class="container">
-        <h1></h1>
+        <h1 style="margin-top: 20px">Incident List</h1>
 
         <!-- Loop over incidents -->
         {% for incident in incidents %}
         <!-- Incident Card -->
         <div class="incident-card">
-            <h4><div class="incident-header">{{ incident.title }}</div></h4>
+            <div class="incident-header">⚠️ {{ incident.title }}</div>
             <div class="incident-details">
-                <h5><p><strong>Date Reported:</strong> {{ incident.date_reported }}</p></h5>
-                <h5><p><strong>Status:</strong> {{ incident.status }}</p></h5>
-                <h5><p><strong>Location:</strong> {{ incident.location }}</p></h5>
-                <h5><p><strong>Reported By:</strong> {{ incident.reported_by }}</p></h5>
+                <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
+                <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
+                <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
+                <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
             </div>
-            <div class="incident-description"><h5><p><strong>Description:</strong></p></h5>
-                {{ incident.description }}
-            </div>
+            <div class="incident-description"><strong>🔸 Description:</strong> {{ incident.description }}</div>
             <div class="incident-image-container">
                 {% if incident.image %}
                     <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
                 {% else %}
                     <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
                 {% endif %}
-                <div class="button-container">
-                    <button class="incident-button">Edit</button>
-                    <button class="delete-button">Delete</button>
-                    <!--<button class="incident-button">View</button>-->
-                </div>
+            </div>
+            <div class="button-container">
+                <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
+                <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
             </div>
         </div>
         {% endfor %}
@@ -44,169 +41,158 @@
 </body>
 </html>
 
-        <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            transition: background-color 0.5s, color 0.5s;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        transition: background-color 0.5s, color 0.5s;
+    }
 
-        /* Dark mode */
-        body.dark-mode {
-            background-color: #121212;
-            color: #f0f0f0;
-        }
+    /* Dark mode */
+    body.dark-mode {
+        background-color: #121212;
+        color: #f0f0f0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+    }
 
-        .incident-card {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            transition: box-shadow 0.3s ease;
-        }
+    .incident-card {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+        padding: 20px;
+        transition: box-shadow 0.3s ease, background-color 0.5s;
+        position: relative;
+    }
 
-        .incident-card:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
+    .incident-card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
 
-        .incident-header {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #333; /* Default color */
-        }
+    .incident-header {
+        font-size: 1.5em;
+        color: #333;
+        font-weight: bold;
+    }
 
-        .incident-details {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-            font-size: 0.9em;
-            color: black;
-        }
+    .incident-details {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 15px 0;
+        font-size: 1em;
+        color: black;
+    }
 
-        .incident-details p {
-            margin: 5px 0;
-        }
+    .incident-description {
+        margin-top: 10px;
+        line-height: 1.5;
+        color: black;
+    }
 
-        .incident-description {
-            margin-top: 10px;
-            line-height: 1.6;
-            color: black;
-            transition: opacity 0.3s ease; /* Smooth transition for opacity */
-        }
+    /* Dark mode adjustments */
+    body.dark-mode .incident-card {
+        background-color: #1e1e1e;
+        border-color: #444;
+    }
 
-        body.dark-mode .incident-description {
-            opacity: 0.7; /* Slightly fade the description in dark mode */
-            color: black; /* Ensure description is visible in dark mode */
-        }
+    body.dark-mode .incident-header {
+        color: #f0f0f0;
+    }
 
-        .incident-image-container {
-            display: flex;
-            align-items: flex-start; /* Align buttons and image vertically */
-            margin-top: 15px;
-        }
+    body.dark-mode .incident-details,
+    body.dark-mode .incident-description {
+        color: #bbb;
+    }
 
-        .incident-image {
-            max-width: 100%;
-            margin-right: 15px; /* Add space between image and buttons */
-            height: 500px;
-            width: 500px;/* Adjust height automatically */
-            border-radius: 8px;
-        }
+    .incident-image-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
 
-        .button-container {
-            display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-        }
+    .incident-image {
+        max-width: 100%;
+        height: 400px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 
-        .incident-button {
-            background-color: #007bff; /* Button background color */
-            color: #ffffff; /* Button text color */
-            border: none; /* No border */
-            border-radius: 4px; /* Rounded corners */
-            padding: 10px 15px; /* Button padding */
-            align-items: center;
-            margin-top: 200px;
-            width: 200px;
-            margin-left: 200px;
-            margin-bottom: 5px; /* Space between buttons */
-            cursor: pointer; /* Pointer on hover */
-            transition: background-color 0.3s; /* Smooth background change */
-        }
+    /* Button container styling */
+    .button-container {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
 
-        .incident-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
+    /* Button styles */
+    .incident-button,
+    .delete-button {
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1em;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
 
-        /* Dark mode button styles */
-        body.dark-mode .incident-button {
-            background-color: #333; /* Darker background for buttons */
-            color: #f0f0f0; /* Light text color in dark mode */
-        }
+    .incident-button {
+        background-color: black;
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    }
 
-        body.dark-mode .incident-button:hover {
-            background-color: #555; /* Lighter dark color on hover */
-        }
+    .incident-button:hover {
+        background-color: black;
+        box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+    }
 
-        /* Dark mode styles */
-        body.dark-mode .incident-card {
-            background-color: #1e1e1e;
-            border-color: #444;
-        }
+    .delete-button {
+        background-color: #dc3545;
+        color: #ffffff;
+        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+    }
 
-        body.dark-mode .incident-header {
-            color: #f0f0f0; /* Ensure title is visible in dark mode */
-        }
+    .delete-button:hover {
+        background-color: #c82333;
+        box-shadow: 0 6px 12px rgba(200, 35, 51, 0.4);
+    }
 
-        body.dark-mode .incident-details {
-            color: #bbb;
-        }
+    /* Dark mode button styles */
+    body.dark-mode .incident-button {
+        background-color: #333;
+        color: #f0f0f0;
+    }
 
-        .delete-button {
-            background-color: #dc3545; /* Red background for delete button */
-            color: #ffffff; /* White text color */
-             border: none; /* No border */
-            border-radius: 4px; /* Rounded corners */
-            padding: 10px 15px; /* Button padding */
-            align-items: center;
-            margin-top: 20px;
-            width: 200px;
-            margin-left: 200px;
-            margin-bottom: 5px; /* Space between buttons */
-            cursor: pointer; /* Pointer on hover */
-            transition: background-color 0.3s; /* Smooth background change */
-        }
+    body.dark-mode .incident-button:hover {
+        background-color: #555;
+    }
 
-        .delete-button:hover {
-            background-color: #c82333; /* Darker red on hover */
-        }
+    body.dark-mode .delete-button {
+        background-color: #992027;
+        color: #f0f0f0;
+    }
 
-
-
-        @media (min-width: 700px) {
-            .incident-details {
-                flex-direction: row;
-            }
-        }
-    </style>
-
+    body.dark-mode .delete-button:hover {
+        background-color: #871823;
+    }
+</style>
 {% endblock %}

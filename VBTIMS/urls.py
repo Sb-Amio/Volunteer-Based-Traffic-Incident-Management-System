@@ -27,7 +27,9 @@ urlpatterns = [
     path('onaction/', v_views.onaction, name='onaction'),
     path('noaction/', v_views.noaction, name='noaction'),
     path('selectMode/', v_views.selectMode, name='selectMode'),
+    path('about_us/', v_views.about_us, name='about_us'),
     path('add_incident/', v_views.add_incident, name='add_incident'),
-
+    path('delete_incident/<str:id>', v_views.delete_incident, name='delete_incident'),
+    path('edit_incident/<str:id>', v_views.edit_incident, name='edit_incident'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
