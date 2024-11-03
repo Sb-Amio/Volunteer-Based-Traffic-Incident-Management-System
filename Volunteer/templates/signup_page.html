@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!--<link rel="stylesheet" href="{% static 'css/signup_page.css' %}">
+    <script src="{% static 'css/signup_page.js' %}"></script>-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: #1877f2;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #1877f2;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 0px;
+            top: 45px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 14px;
+            color: #1877f2;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        .validation-message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #165fbd;
+        }
+
+        .rules {
+            text-align: left;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+        }
+
+        .signup-link a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Create an Account</h2>
+
+        <form id="signup-form" method="POST">
+            {% csrf_token %}
+
+            <!-- Display error messages -->
+            {% if form.errors %}
+                <div class="error-message">
+                    {% for field, error_list in form.errors.items %}
+                        {% for error in error_list %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                {{ form.password1 }}
+                <span class="show-password" onclick="togglePasswordVisibility('id_password1', this)">Show</span>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label>
+                {{ form.password2 }}
+                <span class="show-password" onclick="togglePasswordVisibility('id_password2', this)">Show</span>
+            </div>
+
+            <div id="password-validation" class="validation-message"></div>
+
+            <button type="submit" class="login-btn">Register</button>
+        </form>
+        <div class="signup-link">
+            <p>Already have an account? <a href="{% url 'login_page' %}">Log In</a></p>
+        </div>
+    </div>
+
+<script>
+           function togglePasswordVisibility(id, element) {
+            const passwordField = document.getElementById(id);
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                element.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                element.textContent = 'Show';
+            }
+        }
+
+        const password1Field = document.getElementById('id_password1');
+        const password2Field = document.getElementById('id_password2');
+        const validationMessage = document.getElementById('password-validation');
+
+        password2Field.addEventListener('input', function() {
+            if (password1Field.value && password2Field.value) {
+                if (password1Field.value === password2Field.value) {
+                    password1Field.style.borderColor = 'green';
+                    password2Field.style.borderColor = 'green';
+                    validationMessage.textContent = 'Passwords match!';
+                    validationMessage.style.color = 'green';
+                } else {
+                    password1Field.style.borderColor = 'red';
+                    password2Field.style.borderColor = 'red';
+                    validationMessage.textContent = 'Passwords do not match!';
+                    validationMessage.style.color = 'red';
+                }
+            } else {
+                password1Field.style.borderColor = '#dddfe2';
+                password2Field.style.borderColor = '#dddfe2';
+                validationMessage.textContent = '';
+            }
+        });
+
+</script>
+
+</body>
+</html>

@@ -11,12 +11,21 @@
     <h2>Who are you?</h2>
 
     <div class="options">
-      <div class="option">
-        <img src="{% static 'images/Volunteer.png' %}"> <p>Volunteer</p>
-      </div>
-      <div class="option">
-        <img src="{% static 'images/Normal User.png' %}"> <p>Normal User</p>
-      </div>
+      <a href="{% url 'signup_page' %}"> <!-- Replace 'your_target_url' with the actual URL name -->
+        <div class="option">
+          <img src="{% static 'images/Volunteer.png' %}" alt="Volunteer Icon">
+          <p>Volunteer</p>
+        </div>
+      </a>
+
+      <a href="#"> <!-- Replace 'your_target_url' with the actual URL name -->
+        <div class="option">
+            <img src="{% static 'images/Normal User.png' %}" alt="Volunteer Icon">
+            <p>Normal User</p>
+        </div>
+      </a>
+
+
     </div>
   </div>
 </body>

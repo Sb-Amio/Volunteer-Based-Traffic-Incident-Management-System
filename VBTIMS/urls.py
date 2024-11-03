@@ -22,14 +22,17 @@ from Volunteer import views as v_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', v_views.homepage, name='homepage'),
+    path('homepage/', v_views.homepage, name='homepage'),
     path('my_events/', v_views.my_events, name='my_events'),
     path('onaction/', v_views.onaction, name='onaction'),
     path('noaction/', v_views.noaction, name='noaction'),
-    path('selectMode/', v_views.selectMode, name='selectMode'),
+    path('', v_views.selectMode, name='selectMode'),
     path('about_us/', v_views.about_us, name='about_us'),
     path('add_incident/', v_views.add_incident, name='add_incident'),
-    path('delete_incident/<str:id>', v_views.delete_incident, name='delete_incident'),
-    path('edit_incident/<str:id>', v_views.edit_incident, name='edit_incident'),
+    path('delete_incident/<str:id>/', v_views.delete_incident, name='delete_incident'),
+    path('edit_incident/<str:id>/', v_views.edit_incident, name='edit_incident'),
+    path('login/', v_views.login_page, name='login_page'),
+    path('signup/', v_views.sign_up, name='signup_page'),
+    path('logout/', v_views.logout_view, name='logout'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

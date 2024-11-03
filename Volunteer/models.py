@@ -1,7 +1,8 @@
 from django.db import models
 
 # Create your models here.
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+
 
 class Incident(models.Model):
     STATUS_CHOICES = [
@@ -26,11 +27,3 @@ class Incident(models.Model):
     def __str__(self):
         return self.title
 
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_admin = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.user.username

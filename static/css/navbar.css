@@ -1,0 +1,31 @@
+
+  /* Default (Light Mode) */
+  body, html {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .navbar {
+    background-color: #17202a;
+  }
+
+  .footer {
+    background-color: #17202a;
+    color: #ffffff;
+  }
+
+  /* Dark Mode Styles */
+  .dark-mode body, .dark-mode html {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+
+  .navbar.dark-mode {
+    background-color: #333;
+  }
+
+  .footer.dark-mode {
+    background-color: #000;
+    color: #f0f0f0;
+  }

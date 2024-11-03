@@ -1,0 +1,18 @@
+{% extends 'common.html' %}  <!-- Change to your actual base template if needed -->
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete the following incident?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="button-container">
+            <button type="submit" class="btn-delete">Yes, Delete</button>
+            <a href="{% url 'homepage' %}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

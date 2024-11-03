@@ -1,122 +1,39 @@
 {% extends 'common.html' %}
 {% load static %}
 {% block content %}
-
-<style>
-    /* Main form container styling */
-    .form-container {
-        margin-top: 60px;
-        display: flex;
-        justify-content: center;
-    }
-
-    /* Form card styling */
-    .form-card {
-        padding: 30px 40px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #ffffff;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-        width: 450px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .form-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Header styling */
-    .form-card h2 {
-        margin-bottom: 25px;
-        font-size: 1.8em;
-        color: #333;
-        text-align: center;
-    }
-
-    /* Form group styling */
-    .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-    .form-label {
-        font-weight: 600;
-        color: #555;
-        margin-bottom: 8px;
-        font-size: 1em;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1em;
-        transition: border-color 0.3s;
-    }
-
-    .form-control:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-
-    /* Button container styling */
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 30px;
-    }
-
-    /* Submit button styling */
-    .btn-submit {
-        width: 120px;
-        height: 45px;
-        background-color: #007bff;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1em;
-        font-weight: 600;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .btn-submit:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-    }
-
-    /* Back button styling */
-    .btn-back {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 120px;
-        height: 45px;
-        color: #333;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-decoration: none;
-        background-color: #f8f9fa;
-        transition: background-color 0.3s, color 0.3s, transform 0.3s ease;
-    }
-
-    .btn-back:hover {
-        background-color: #e2e6ea;
-        color: #007bff;
-        transform: translateY(-2px);
-    }
-</style>
-
+<link rel="stylesheet" href="{% static 'css/add_incident.css' %}">
 <div class="form-container">
     <form action="" method="POST" enctype="multipart/form-data" class="form-card">
         {% csrf_token %}
         <h2>Incident Information</h2>
-        {{ form.as_p }}
-
+        <div class="form-group">
+             <label for="id_username">Title</label>
+             {{ form.title }}
+        </div>
+                <div class="form-group">
+             <label for="id_username">Description</label>
+             {{ form.description }}
+        </div>
+         <div class="form-group">
+             <label for="id_username">Location</label>
+             {{ form.location }}
+        </div>
+         <div class="form-group">
+             <label for="id_username">Status</label>
+             {{ form.status }}
+        </div>
+         <div class="form-group">
+             <label for="id_username">Assign To</label>
+             {{ form.assigned_to }}
+        </div>
+         <div class="form-group">
+             <label for="id_username">Service Type</label>
+             {{ form.service_type }}
+        </div>
+         <div class="form-group">
+             <label for="id_username">Image</label>
+             {{ form.image}}
+        </div>
         <!-- Button container with aligned buttons -->
         <div class="button-container">
             <a href="{% url 'homepage' %}" class="btn-back">Back</a>

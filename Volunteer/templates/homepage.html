@@ -6,193 +6,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <script src="{% static 'css/homepage.js' %}"></script>
     <title>Incident List</title>
 </head>
 <body>
     <div class="container">
-        <h1 style="margin-top: 20px">Incident List</h1>
+        <h1 class="title">Incident List</h1>
 
         <!-- Loop over incidents -->
         {% for incident in incidents %}
-        <!-- Incident Card -->
         <div class="incident-card">
-            <div class="incident-header">⚠️ {{ incident.title }}</div>
-            <div class="incident-details">
-                <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
-                <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
-                <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
-                <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+            <div class="incident-content">
+                <div class="incident-image-container">
+                    {% if incident.image %}
+                        <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
+                    {% else %}
+                        <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
+                    {% endif %}
+                </div>
+
+                <div class="incident-info">
+                    <div class="incident-header">
+                        ➡️{{ incident.title }}
+                        {% if incident.is_new %}
+                            <span class="new-sign">🔴</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="incident-details">
+                        <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
+                        <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
+                        <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
+                        <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+                    </div>
+
+                    <div class="incident-description">
+                        <strong>🔸 Description:</strong>
+                        <span class="description-text" data-full-text="{{ incident.description }}">
+                            {{ incident.description|truncatechars:500 }}
+                        </span>
+                        {% if incident.description|length > 500 %}
+                            <button class="see-more-btn">See More</button>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="incident-description"><strong>🔸 Description:</strong> {{ incident.description }}</div>
-            <div class="incident-image-container">
-                {% if incident.image %}
-                    <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
-                {% else %}
-                    <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
-                {% endif %}
-            </div>
+
             <div class="button-container">
                 <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
                 <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
             </div>
         </div>
+        {% empty %}
+        <p>No incidents to display.</p>
         {% endfor %}
     </div>
 </body>
 </html>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        margin: 0;
-        padding: 20px;
-        transition: background-color 0.5s, color 0.5s;
-    }
-
-    /* Dark mode */
-    body.dark-mode {
-        background-color: #121212;
-        color: #f0f0f0;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 2em;
-    }
-
-    .incident-card {
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        margin-bottom: 25px;
-        padding: 20px;
-        transition: box-shadow 0.3s ease, background-color 0.5s;
-        position: relative;
-    }
-
-    .incident-card:hover {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .incident-header {
-        font-size: 1.5em;
-        color: #333;
-        font-weight: bold;
-    }
-
-    .incident-details {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin: 15px 0;
-        font-size: 1em;
-        color: black;
-    }
-
-    .incident-description {
-        margin-top: 10px;
-        line-height: 1.5;
-        color: black;
-    }
-
-    /* Dark mode adjustments */
-    body.dark-mode .incident-card {
-        background-color: #1e1e1e;
-        border-color: #444;
-    }
-
-    body.dark-mode .incident-header {
-        color: #f0f0f0;
-    }
-
-    body.dark-mode .incident-details,
-    body.dark-mode .incident-description {
-        color: #bbb;
-    }
-
-    .incident-image-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 15px;
-    }
-
-    .incident-image {
-        max-width: 100%;
-        height: 400px;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-
-    /* Button container styling */
-    .button-container {
-        display: flex;
-        gap: 10px;
-        justify-content: flex-end;
-        margin-top: 20px;
-    }
-
-    /* Button styles */
-    .incident-button,
-    .delete-button {
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        text-decoration: none;
-        font-size: 1em;
-        transition: all 0.3s;
-        cursor: pointer;
-    }
-
-    .incident-button {
-        background-color: black;
-        color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-    }
-
-    .incident-button:hover {
-        background-color: black;
-        box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
-    }
-
-    .delete-button {
-        background-color: #dc3545;
-        color: #ffffff;
-        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-    }
-
-    .delete-button:hover {
-        background-color: #c82333;
-        box-shadow: 0 6px 12px rgba(200, 35, 51, 0.4);
-    }
-
-    /* Dark mode button styles */
-    body.dark-mode .incident-button {
-        background-color: #333;
-        color: #f0f0f0;
-    }
-
-    body.dark-mode .incident-button:hover {
-        background-color: #555;
-    }
-
-    body.dark-mode .delete-button {
-        background-color: #992027;
-        color: #f0f0f0;
-    }
-
-    body.dark-mode .delete-button:hover {
-        background-color: #871823;
-    }
-</style>
 {% endblock %}
