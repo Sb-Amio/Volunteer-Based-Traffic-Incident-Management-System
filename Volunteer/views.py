@@ -50,12 +50,12 @@ def homepage(request):
 
 @login_required
 def my_events(request):
-    inc = Incident.objects.all()
+    inc = Incident.objects.filter(reported_by=request.user).order_by('-date_reported')
     context = {'inc': inc}
     return render(request, template_name='my_events.html', context=context)
 
 def onaction(request):
-    inc = Incident.objects.filter(status='On action')
+    inc = Incident.objects.filter(status='on action')
     context = {'inc': inc}
     return render(request, 'onaction.html', context=context)
 

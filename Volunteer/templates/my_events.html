@@ -6,15 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_events.css' %}">
     <script src="{% static 'css/homepage.js' %}"></script>
     <title>Incident List</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">Created Events by Yourself</h1>
+        <h1 class="title" style="padding-top: 10px;">Created Events by Yourself</h1>
         <!-- Loop over incidents -->
-        {% for incident in incidents %}
+        {% for incident in inc %}
         <div class="incident-card">
             <div class="incident-content">
                 <div class="incident-image-container">

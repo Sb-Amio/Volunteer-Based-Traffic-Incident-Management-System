@@ -6,39 +6,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/noaction.css' %}">
+    <link rel="stylesheet" href="{% static 'css/onaction.css' %}">
+    <!--<script src="{% static 'css/homepage.js' %}"></script>-->
     <title>Incident List</title>
 </head>
 <body>
     <div class="container">
-        <h1 style="margin-top: 20px">Incident List</h1>
-
+        <h1 class="title" style="padding-top: 10px;color: red">📌Action Required!📌</h1>
         <!-- Loop over incidents -->
-        {% for incident in incidents %}
-        <!-- Incident Card -->
+        {% for incident in inc %}
         <div class="incident-card">
-            <div class="incident-header">⚠️ {{ incident.title }}</div>
-            <div class="incident-details">
-                <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
-                <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
-                <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
-                <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+            <div class="incident-content">
+                <div class="incident-image-container">
+                    {% if incident.image %}
+                        <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
+                    {% else %}
+                        <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
+                    {% endif %}
+                </div>
+
+                <div class="incident-info">
+                    <div class="incident-header">
+                        ➡️{{ incident.title }}
+                        {% if incident.is_new %}
+                            <span class="new-sign">🔴</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="incident-details">
+                        <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
+                        <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
+                        <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+                    </div>
+                    <div class="incident-description">
+                        <strong>🔸 Description:</strong>
+                        <span class="description-text" data-full-text="{{ incident.description }}">
+                            {{ incident.description|truncatechars:500 }}
+                        </span>
+                        {% if incident.description|length > 500 %}
+                            <button class="see-more-btn">See More</button>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="incident-description"><strong>🔸 Description:</strong> {{ incident.description }}</div>
-            <div class="incident-image-container">
-                {% if incident.image %}
-                    <img src="{{ incident.image.url }}" alt="Incident Image" class="incident-image">
-                {% else %}
-                    <img src="{% static 'images/ROAID.png' %}" alt="Incident Image" class="incident-image">
-                {% endif %}
-            </div>
-            <div class="button-container">
+
+            <!--<div class="button-container">
                 <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
                 <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
-            </div>
+            </div>-->
         </div>
+        {% empty %}
+        <p>No incidents to display.</p>
         {% endfor %}
     </div>
 </body>
 </html>
-{% endblock %}
+{% endblock %}s
