@@ -22,7 +22,7 @@ class Incident(models.Model):
     service_type = models.CharField(max_length=50,
                                     choices=[('fire', 'Fire'), ('police', 'Police'), ('ambulance', 'Ambulance')],
                                     default='police')
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True,upload_to='images/')
 
     def __str__(self):
         return self.title

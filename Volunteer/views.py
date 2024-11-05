@@ -64,6 +64,11 @@ def noaction(request):
     context = {'inc': inc}
     return render(request, 'noaction.html', context)
 
+def completed(request):
+    inc = Incident.objects.filter(status='completed')
+    context = {'inc': inc}
+    return render(request, 'complete.html', context)
+
 def selectMode(request):
     return render(request, 'selectMode.html')
 

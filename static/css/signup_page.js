@@ -1,35 +1,40 @@
 
-        function togglePasswordVisibility(id, element) {
-            const passwordField = document.getElementById(id);
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                element.textContent = 'Hide';
+    document.addEventListener("DOMContentLoaded", function () {
+        const password1 = document.getElementById("id_password1");
+        const password2 = document.getElementById("id_password2");
+        const validationMessage = document.getElementById("password-validation");
+
+        function validatePasswords() {
+            if (password1.value === password2.value && password1.value !== "") {
+                validationMessage.textContent = "Passwords match";
+                validationMessage.style.color = "green";
+                password1.style.borderColor = "green";
+                password2.style.borderColor = "green";
+            } else if (password2.value !== "") {
+                validationMessage.textContent = "Passwords do not match";
+                validationMessage.style.color = "red";
+                password1.style.borderColor = "red";
+                password2.style.borderColor = "red";
             } else {
-                passwordField.type = 'password';
-                element.textContent = 'Show';
+                validationMessage.textContent = "";
+                password1.style.borderColor = "";
+                password2.style.borderColor = "";
             }
         }
 
-        const password1Field = document.getElementById('id_password1');
-        const password2Field = document.getElementById('id_password2');
-        const validationMessage = document.getElementById('password-validation');
+        // Add event listeners to check passwords as the user types
+        password1.addEventListener("input", validatePasswords);
+        password2.addEventListener("input", validatePasswords);
+    });
 
-        password2Field.addEventListener('input', function() {
-            if (password1Field.value && password2Field.value) {
-                if (password1Field.value === password2Field.value) {
-                    password1Field.style.borderColor = 'green';
-                    password2Field.style.borderColor = 'green';
-                    validationMessage.textContent = 'Passwords match!';
-                    validationMessage.style.color = 'green';
-                } else {
-                    password1Field.style.borderColor = 'red';
-                    password2Field.style.borderColor = 'red';
-                    validationMessage.textContent = 'Passwords do not match!';
-                    validationMessage.style.color = 'red';
-                }
-            } else {
-                password1Field.style.borderColor = '#dddfe2';
-                password2Field.style.borderColor = '#dddfe2';
-                validationMessage.textContent = '';
-            }
-        });
+    function togglePasswordVisibility(fieldId, element) {
+        const field = document.getElementById(fieldId);
+        if (field.type === "password") {
+            field.type = "text";
+            element.textContent = "Hide";
+        } else {
+            field.type = "password";
+            element.textContent = "Show";
+        }
+    }
+

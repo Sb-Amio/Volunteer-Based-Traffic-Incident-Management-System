@@ -1,13 +1,18 @@
-// login_page.js
+ document.addEventListener("DOMContentLoaded", function() {
+        const seeMoreButtons = document.querySelectorAll(".see-more-btn");
 
-function togglePasswordVisibility(inputId, toggleBtn) {
-    const passwordField = document.getElementById(inputId);
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleBtn.textContent = 'Hide';
-    } else {
-        passwordField.type = 'password';
-        toggleBtn.textContent = 'Show';
-    }
-}
+        seeMoreButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const descriptionText = this.previousElementSibling;
+                const fullText = descriptionText.getAttribute("data-full-text");
 
+                if (descriptionText.textContent === fullText) {
+                    descriptionText.textContent = fullText.slice(0, 500) + "...";
+                    this.textContent = "See More";
+                } else {
+                    descriptionText.textContent = fullText;
+                    this.textContent = "See Less";
+                }
+            });
+        });
+    });
