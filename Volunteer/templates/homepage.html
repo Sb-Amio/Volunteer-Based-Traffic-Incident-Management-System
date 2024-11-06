@@ -30,7 +30,17 @@
                     <div class="incident-header">
                         ➡️{{ incident.title }}
                         {% if incident.is_new %}
-                            <span class="new-sign">🔴</span>
+                            {% if incident.status == 'No Action' %}
+                                <span class="new-sign">🔴</span>
+                            {% endif %}
+                        {% endif %}
+                        {% if incident.is_new %}
+                            {% if incident.status == 'On Action' %}
+                                <span class="new-sign">🟢</span>
+                            {% endif %}
+                        {% endif %}
+                        {% if incident.status == 'Completed' %}
+                            <span class="#">✅</span>
                         {% endif %}
                     </div>
 
@@ -38,6 +48,7 @@
                         <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
                         <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
                         <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
+                        <p><strong>🔸 Service Required</strong> {{ incident.service_type }}</p>
                         <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
                     </div>
 

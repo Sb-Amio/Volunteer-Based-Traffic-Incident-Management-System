@@ -22,12 +22,12 @@
              <label for="id_username">Status</label>
              {{ form.status }}
         </div>
-         <div class="form-group">
+         <!--<div class="form-group">
              <label for="id_username">Assign To</label>
              {{ form.assigned_to }}
-        </div>
+        </div>-->
          <div class="form-group">
-             <label for="id_username">Service Type</label>
+             <label for="id_username">Service Required</label>
              {{ form.service_type }}
         </div>
          <div class="form-group">
@@ -36,7 +36,7 @@
         </div>
         <!-- Button container with aligned buttons -->
         <div class="button-container">
-            <a href="{% url 'my_events' %}" class="btn-back">Back</a>
+            <a href="javascript:history.back()" class="btn-back">Back</a>
             <input class="btn-submit" type="submit" name="Submit" value="Upload">
         </div>
     </form>

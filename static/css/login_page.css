@@ -1,99 +1,87 @@
-
+/* Reset and base styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f9;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main-title {
+    font-size: 36px;
+    color: #3c3c3c;
+    margin-bottom: 10px;
+}
+
+.sub-title {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Style for the options (Volunteer / Normal User) */
+.options {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-.login-container {
-    background-color: #fff;
+.option {
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 360px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 20px;
     text-align: center;
-}
-
-.login-container h2 {
-    color: #1877f2;
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-align: left;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #dddfe2;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #1877f2;
-}
-
-.show-password {
-    position: absolute;
-    right: 10px;
-    top: 45px;
-    transform: translateY(-50%);
     cursor: pointer;
-    font-size: 14px;
-    color: #1877f2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.error-message {
-    color: red;
-    margin-bottom: 15px;
+.option:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.form-group button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1877f2;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
+.icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+/* Style for the Login button section */
+.login-section {
+    margin-top: 40px;
+}
+
+.login-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
     font-size: 18px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.form-group button:hover {
-    background-color: #165fbd;
-}
-
-.forgot-password, .signup-link, .back-button {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.forgot-password a, .signup-link a, .back-button a {
-    color: #1877f2;
     text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.forgot-password a:hover, .signup-link a:hover, .back-button a:hover {
-    text-decoration: underline;
+.login-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.login-btn:focus {
+    outline: none;
+}
+
+/* Add some space to the login link */
+.login-section p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
 }

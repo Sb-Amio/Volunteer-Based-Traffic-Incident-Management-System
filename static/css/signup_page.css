@@ -108,3 +108,60 @@
         .signup-link a:hover {
             text-decoration: underline;
         }
+
+
+
+        /* Hide the default radio button */
+input[type="radio"] {
+    display: none;
+}
+
+/* Custom radio button style */
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Custom circle for radio button */
+input[type="radio"] + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background-color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* When radio button is checked, style the label */
+input[type="radio"]:checked + label::before {
+    background-color: green;
+    border-color: green;
+}
+
+/* Custom checkmark (inside the circle) when radio is checked */
+input[type="radio"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* Optional: Change the label color when hovered */
+input[type="radio"] + label:hover {
+    color: #007BFF;
+}
+
+

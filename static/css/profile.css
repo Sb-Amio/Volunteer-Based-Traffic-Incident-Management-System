@@ -1,0 +1,19 @@
+.messages {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #d6e9c6;
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.error {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ebccd1;
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.alert {
+    margin-bottom: 10px;
+}

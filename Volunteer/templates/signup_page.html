@@ -13,6 +13,7 @@
     <div class="login-container">
         <h2>Create an Account</h2>
 
+
         <form id="signup-form" method="POST">
             {% csrf_token %}
 
@@ -48,14 +49,13 @@
 
             <div id="password-validation" class="validation-message"></div>
 
-            <button type="submit" class="login-btn">Register</button>
+            <button type="submit" class="login-btn" style="margin-left: 12px">Register</button>
         </form>
         <div class="signup-link">
             <p>Already have an account? <a href="{% url 'login_page' %}">Log In</a></p>
+            <p><a href="{% url 'selectMode' %}" >Go to Register Page</a></p>
         </div>
     </div>
-
-
 
 </body>
 </html>

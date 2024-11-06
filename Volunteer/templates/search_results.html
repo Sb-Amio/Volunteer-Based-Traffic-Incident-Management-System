@@ -1,0 +1,38 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'css/search_results.css' %}">
+</head>
+<body>
+    <!--<nav>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+            <input type="text" id="search-input" name="query" placeholder="Search location..." autocomplete="off" class="form-control">
+            <button type="submit" class="btn btn-outline-light">Search</button>
+            <div id="suggestions-box" class="suggestions-box"></div>
+        </form>
+    </nav>-->
+
+    <div class="results-container">
+        <h2>Search Results for "{{ query }}"</h2>
+        {% if search_results %}
+            {% for incident in search_results %}
+                <div class="incident-card">
+                    <h3>{{ incident.title }}</h3>
+                    <p><strong>Location:</strong> {{ incident.location }}</p>
+                    <p><strong>Status:</strong> {{ incident.status }}</p>
+                <a href = "{% url 'event_details' incident.id %}">View Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">No incidents found for this location.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

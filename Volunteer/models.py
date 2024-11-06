@@ -6,9 +6,9 @@ from django.contrib.auth.models import User, AbstractUser
 
 class Incident(models.Model):
     STATUS_CHOICES = [
-        ('no action', 'No Action'),
-        ('on action', 'On Action'),
-        ('completed', 'Completed'),
+        ('No Action', 'No Action'),
+        ('On Action', 'On Action'),
+        ('Completed', 'Completed'),
     ]
 
     title = models.CharField(max_length=200)
@@ -26,4 +26,9 @@ class Incident(models.Model):
 
     def __str__(self):
         return self.title
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_volunteer = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 

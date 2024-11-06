@@ -1,35 +1,48 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
+from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
-from .models import Incident
 from .forms import *
 
 # Create your views here.
+
 def login_page(request):
     if request.method == 'POST':
-        form = CustomLoginForm(data=request.POST)
+        form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('homepage')  # Redirect to a success page
+                # Corrected attribute access for UserProfile
+                if hasattr(user, 'userprofile') and user.userprofile.is_volunteer:
+                    return redirect('userpage')  # Redirect to volunteer dashboard
+                else:
+                    return redirect('homepage')  # Redirect to normal user dashboard
             else:
-                form.add_error(None, 'Invalid username or password')
+                messages.error(request, "Invalid username or password.")
     else:
-        form = CustomLoginForm()
+        form = AuthenticationForm()
     return render(request, 'login_page.html', {'form': form})
 
-def sign_up(request):
+def sign_up(request, user_type):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the user
-            return redirect('login_page')  # Redirect to the login page after successful registration
+            user = form.save()
+            # Create a UserProfile instance associated with the user
+            is_volunteer = True if user_type == 'Volunteer' else False
+            UserProfile.objects.create(user=user, is_volunteer=is_volunteer)
+            return redirect('login_page')
     else:
         form = RegistrationForm()
     return render(request, 'signup_page.html', {'form': form})
@@ -55,17 +68,17 @@ def my_events(request):
     return render(request, template_name='my_events.html', context=context)
 
 def onaction(request):
-    inc = Incident.objects.filter(status='on action')
+    inc = Incident.objects.filter(status='On Action')
     context = {'inc': inc}
     return render(request, 'onaction.html', context=context)
 
 def noaction(request):
-    inc = Incident.objects.filter(status='no action')
+    inc = Incident.objects.filter(status='No Action')
     context = {'inc': inc}
     return render(request, 'noaction.html', context)
 
 def completed(request):
-    inc = Incident.objects.filter(status='completed')
+    inc = Incident.objects.filter(status='Completed')
     context = {'inc': inc}
     return render(request, 'complete.html', context)
 
@@ -75,6 +88,7 @@ def selectMode(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
+@login_required
 def add_incident(request):
     form = IncidentForm()
     if request.method == 'POST':
@@ -90,6 +104,7 @@ def add_incident(request):
     context = {'form': form}
     return render(request, template_name='add_incident.html', context=context)
 
+@login_required
 def delete_incident(request, id):
 
     incident = Incident.objects.get(id=id)
@@ -98,6 +113,7 @@ def delete_incident(request, id):
         return redirect('homepage')
     return render(request, template_name='confirm_delete.html')
 
+@login_required
 def edit_incident(request, id):
     inc = Incident.objects.get(pk=id)
     form = IncidentForm(instance=inc)
@@ -109,4 +125,41 @@ def edit_incident(request, id):
     context = {'form': form}
     return render(request, template_name='add_incident.html', context=context)
 
+@login_required
+def search_events(request):
+    query = request.GET.get('query', '').strip()  # Strip any extra whitespace from the query
+    search_results = []
 
+    if query:
+        # Filter incidents based on location with case-insensitive and partial matching
+        search_results = Incident.objects.filter(location__icontains=query)
+
+    context = {'search_results': search_results, 'query': query}
+    return render(request, 'search_results.html', context=context)
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated successfully.')  # Add success message
+            return redirect('profile')  # Redirect after saving
+        else:
+            print(form.errors)  # Print form errors for debugging
+    else:
+        form = UserProfileForm(instance=user)
+
+    context = {'form': form}
+    return render(request, 'profile.html', context=context)
+
+@login_required
+def event_details(request, id):
+    incident = get_object_or_404(Incident, id=id)
+    context = {'incident': incident}
+    return render(request, 'event_details.html', context)
+
+def userpage(request):
+    return render(request, 'userpage.html')

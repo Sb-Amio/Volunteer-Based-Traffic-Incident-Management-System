@@ -1,0 +1,44 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Details</title>
+    <link rel="stylesheet" href="{% static 'css/event_details.css' %}">
+</head>
+<body>
+    <div class="incident-detail-container">
+        <h1>{{ incident.title }}</h1>
+        <div class="incident-meta">
+            <p><strong>Location:</strong> {{ incident.location }}</p>
+            <p><strong>Date Reported:</strong> {{ incident.date_reported }}</p>
+            <p><strong>Status:</strong> {{ incident.status }}</p>
+            <p><strong>Reported By:</strong> {{ incident.reported_by }}</p>
+        </div>
+
+        <div class="incident-image">
+            {% if incident.image %}
+                <img src="{{ incident.image.url }}" alt="Incident Image">
+            {% else %}
+                <img src="{% static 'images/ROAID.png' %}" alt="Default Incident Image">
+            {% endif %}
+        </div>
+
+        <div class="incident-description">
+            <h2>Description</h2>
+            <p>{{ incident.description }}</p>
+        </div>
+        <div class="actions">
+            <a href="javascript:history.back()" class="btn btn-info">Go Back</a>
+        </div>
+        <!--<div class="actions">
+            <a href="{% url 'edit_incident' incident.id %}" class="edit-btn">Edit Incident</a>
+            <a href="{% url 'delete_incident' incident.id %}" class="delete-btn">Delete Incident</a>
+        </div>-->
+    </div>
+</body>
+</html>
+{% endblock %}

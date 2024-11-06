@@ -32,8 +32,14 @@ urlpatterns = [
     path('delete_incident/<str:id>/', v_views.delete_incident, name='delete_incident'),
     path('edit_incident/<str:id>/', v_views.edit_incident, name='edit_incident'),
     path('login/', v_views.login_page, name='login_page'),
-    path('signup/', v_views.sign_up, name='signup_page'),
+    path('signup/<str:user_type>/', v_views.sign_up, name='signup_page'),
     path('logout/', v_views.logout_view, name='logout'),
     path('completed/', v_views.completed, name='completed'),
+    path('search/', v_views.search_events, name='search'),
+    path('profile/', v_views.profile_view, name='profile'),
+    path('event_details/<str:id>/', v_views.event_details, name='event_details'),
+
+    path('userpage/', v_views.userpage, name='userpage'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
