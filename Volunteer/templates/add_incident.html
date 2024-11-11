@@ -3,42 +3,62 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/add_incident.css' %}">
 <div class="form-container">
-    <form action="" method="POST" enctype="multipart/form-data" class="form-card">
+    <form action="" method="POST" enctype="multipart/form-data" class="form-card" onsubmit="return validateImage()">
         {% csrf_token %}
         <h2>Incident Information</h2>
         <div class="form-group">
-             <label for="id_username">Title</label>
-             {{ form.title }}
+            <label for="id_title">Title</label>
+            {{ form.title }}
         </div>
-                <div class="form-group">
-             <label for="id_username">Description</label>
-             {{ form.description }}
+        <div class="form-group">
+            <label for="id_description">Description</label>
+            {{ form.description }}
         </div>
-         <div class="form-group">
-             <label for="id_username">Location</label>
-             {{ form.location }}
+        <div class="form-group">
+            <label for="id_location">Location</label>
+            {{ form.location }}
         </div>
-         <div class="form-group">
-             <label for="id_username">Status</label>
-             {{ form.status }}
+        <div class="form-group">
+            <label for="id_status">Status</label>
+            {{ form.status }}
         </div>
-         <!--<div class="form-group">
-             <label for="id_username">Assign To</label>
-             {{ form.assigned_to }}
-        </div>-->
-         <div class="form-group">
-             <label for="id_username">Service Required</label>
-             {{ form.service_type }}
+        <div class="form-group">
+            <label for="id_service_type">Service Required</label>
+            {{ form.service_type }}
         </div>
-         <div class="form-group">
-             <label for="id_username">Image</label>
-             {{ form.image}}
+        <div class="form-group">
+            <label for="id_image">Image</label>
+            {{ form.image }}
+            <p class="file-info">Allowed file types: .jpg, .jpeg, .png. Max size: 6 MB.</p>
         </div>
-        <!-- Button container with aligned buttons -->
         <div class="button-container">
             <a href="javascript:history.back()" class="btn-back">Back</a>
             <input class="btn-submit" type="submit" name="Submit" value="Upload">
         </div>
     </form>
 </div>
+
+<script>
+function validateImage() {
+    const fileInput = document.getElementById("id_image");
+    const file = fileInput.files[0];
+    const maxSize = 6 * 1024 * 1024;  // 2 MB
+
+    if (file) {
+        const fileType = file.type;
+        const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+        if (!validTypes.includes(fileType)) {
+            alert("Please upload a valid image file (.jpg, .jpeg, .png).");
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            alert("The file is too large. Maximum size is 6 MB.");
+            return false;
+        }
+    }
+    return true;
+}
+</script>
 {% endblock %}

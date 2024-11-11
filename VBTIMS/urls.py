@@ -19,6 +19,8 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from Volunteer import views as v_views
+from NormalUser import views as n_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +41,11 @@ urlpatterns = [
     path('profile/', v_views.profile_view, name='profile'),
     path('event_details/<str:id>/', v_views.event_details, name='event_details'),
 
-    path('userpage/', v_views.userpage, name='userpage'),
+    path('homepage_vol/', n_views.homepage,name='homepage_vol'),
+    path('aboutus_vol/', n_views.about_us_volunteer, name='aboutus_vol'),
+
+
+    #path('userpage/', v_views.userpage, name='userpage'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

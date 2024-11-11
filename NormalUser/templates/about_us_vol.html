@@ -1,0 +1,78 @@
+{% extends 'common_vol.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+</head>
+<body>
+    <div class="about-container">
+        <header class="header">
+            <h1>About Us</h1>
+            <p>Empowering communities through reliable incident management and reporting.</p>
+        </header>
+
+        <section class="mission-section">
+            <div class="mission-content">
+                <img src="{% static 'images/ROAID.png' %}" alt="Our Mission Image" class="mission-image">
+                <div>
+                    <h2>Our Mission</h2>
+                    <p>
+                        We aim to empower communities to handle incidents efficiently and safely through real-time tracking and transparent reporting systems. Our mission is to create safer, more resilient environments for everyone involved.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <h2>Our Core Values</h2>
+            <div class="values-list">
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>Commitment to honesty and transparency in every aspect of our work.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Innovation</h3>
+                    <p>Leveraging technology to enhance response times and streamline reporting.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Community Focus</h3>
+                    <p>Empowering people and organizations to take control of their safety.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2 style="margin-bottom: 30px">Meet Our Team</h2>
+            <div class="team-list">
+                <div class="team-member">
+                    <img src="{% static 'images/tonny.png' %}" alt="CEO">
+                    <p><strong>Tanjina Akhter Tonny</strong><br>CEO & Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/jahid.jpg' %}" alt="CTO">
+                    <p><strong>Jahidul Islam</strong><br>Chief Technical Officer</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/me.jpg' %}" alt="Operations Manager">
+                    <p><strong>Sadman Bin Khorshed Amio</strong><br>Operations Manager</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/tanvir.jpg' %}" alt="Operations Assistant">
+                    <p><strong>Taraq Aziz Tanvir</strong><br>Operations Assistant</p>
+                </div>
+            </div>
+        </section>
+
+        <!--<footer class="footer">
+            <p>Contact us at <a href="mailto:info@example.com">info@example.com</a> | Phone: +123-456-7890</p>
+            <p>&copy; 2024 ROAID. All rights reserved.</p>
+        </footer>-->
+    </div>
+</body>
+</html>
+{% endblock %}

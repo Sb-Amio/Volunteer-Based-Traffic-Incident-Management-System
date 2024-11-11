@@ -1,19 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
-from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 
-# Create your views here.
 
+# Create your views here.
 def login_page(request):
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -25,7 +19,7 @@ def login_page(request):
                 login(request, user)
                 # Corrected attribute access for UserProfile
                 if hasattr(user, 'userprofile') and user.userprofile.is_volunteer:
-                    return redirect('userpage')  # Redirect to volunteer dashboard
+                    return redirect('homepage_vol')  # Redirect to volunteer dashboard
                 else:
                     return redirect('homepage')  # Redirect to normal user dashboard
             else:
