@@ -97,7 +97,7 @@
 .incident-button,
 .delete-button {
     color: white;
-    background-color: #007bff;
+    background-color: black;
     padding: 5px 10px;
     border-radius: 4px;
     text-decoration: none;
@@ -105,7 +105,8 @@
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: skyblue;
+    color: black;
 }
   /* Modal Styles */
         .modal {

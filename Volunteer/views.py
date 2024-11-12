@@ -100,7 +100,6 @@ def add_incident(request):
 
 @login_required
 def delete_incident(request, id):
-
     incident = Incident.objects.get(id=id)
     if request.method == 'POST':
         incident.delete()  # Delete the incident
@@ -115,7 +114,7 @@ def edit_incident(request, id):
         form = IncidentForm(request.POST, request.FILES, instance=inc)
         if form.is_valid():
             form.save()
-            return redirect('homepage')
+            return redirect('my_events')
     context = {'form': form}
     return render(request, template_name='add_incident.html', context=context)
 
@@ -149,11 +148,10 @@ def profile_view(request):
     context = {'form': form}
     return render(request, 'profile.html', context=context)
 
+
 @login_required
 def event_details(request, id):
     incident = get_object_or_404(Incident, id=id)
     context = {'incident': incident}
     return render(request, 'event_details.html', context)
 
-def userpage(request):
-    return render(request, 'userpage.html')

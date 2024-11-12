@@ -41,11 +41,13 @@ urlpatterns = [
     path('profile/', v_views.profile_view, name='profile'),
     path('event_details/<str:id>/', v_views.event_details, name='event_details'),
 
-    path('homepage_vol/', n_views.homepage,name='homepage_vol'),
-    path('aboutus_vol/', n_views.about_us_volunteer, name='aboutus_vol'),
+    path('homepage_volunteer/', n_views.homepage,name='homepage_vol'),
+    path('aboutus_volunteer/', n_views.about_us_volunteer, name='aboutus_vol'),
+    path('assign_volunteer/<str:id>/', n_views.assign_volunteer, name='assign_volunteer'),
+    path('unassign_volunteer/<str:id>/', n_views.unassign_volunteer, name='unassign_volunteer'),
+    path('logout_volunteer/', n_views.logout_volunteer, name='logout_volunteer'),
+    path('complete_volunteer/<str:id>/', n_views.complete_volunteer, name='complete_volunteer'),
 
-
-    #path('userpage/', v_views.userpage, name='userpage'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

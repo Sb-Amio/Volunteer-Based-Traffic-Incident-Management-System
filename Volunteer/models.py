@@ -17,7 +17,7 @@ class Incident(models.Model):
     date_reported = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='No Action')
     reported_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_incidents')
-    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, default= None,
                                     related_name='assigned_incidents')
     service_type = models.CharField(max_length=50,
                                     choices=[('fire', 'Fire'), ('police', 'Police'), ('ambulance', 'Ambulance')],
@@ -30,5 +30,4 @@ class Incident(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_volunteer = models.BooleanField(default=False)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 

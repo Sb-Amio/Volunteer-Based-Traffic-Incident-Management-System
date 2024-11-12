@@ -48,16 +48,17 @@
                         <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
                         <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
                         <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
-                        <p><strong>🔸 Service Required</strong> {{ incident.service_type }}</p>
+                        <p><strong>🔸 Service Required:</strong> {{ incident.service_type }}</p>
                         <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+                        <p><strong>🔸 Assigned To:</strong> {{ incident.assigned_to }}</p>
                     </div>
 
                     <div class="incident-description">
                         <strong>🔸 Description:</strong>
                         <span class="description-text" data-full-text="{{ incident.description }}">
-                            {{ incident.description|truncatechars:500 }}
+                            {{ incident.description|truncatechars:200 }}
                         </span>
-                        {% if incident.description|length > 500 %}
+                        {% if incident.description|length > 200 %}
                             <button class="see-more-btn">See More</button>
                         {% endif %}
                     </div>

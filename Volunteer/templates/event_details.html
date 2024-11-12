@@ -16,9 +16,10 @@
             <p><strong>Location:</strong> {{ incident.location }}</p>
             <p><strong>Date Reported:</strong> {{ incident.date_reported }}</p>
             <p><strong>Status:</strong> {{ incident.status }}</p>
+            <p><strong>Service Type:</strong> {{ incident.service_type }}</p>
             <p><strong>Reported By:</strong> {{ incident.reported_by }}</p>
+            <p><strong>Assigned To:</strong> {{ incident.assigned_to }}</p>
         </div>
-
         <div class="incident-image">
             {% if incident.image %}
                 <img src="{{ incident.image.url }}" alt="Incident Image">

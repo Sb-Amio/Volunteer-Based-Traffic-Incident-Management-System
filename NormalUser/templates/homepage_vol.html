@@ -49,26 +49,33 @@
                         <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
                         <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
                         <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
-                        <p><strong>🔸 Service Required</strong> {{ incident.service_type }}</p>
+                        <p><strong>🔸 Service Required:</strong> {{ incident.service_type }}</p>
                         <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+                        <p><strong>🔸 Assigned To:</strong> {{ incident.assigned_to }}</p>
                     </div>
 
                     <div class="incident-description">
                         <strong>🔸 Description:</strong>
                         <span class="description-text" data-full-text="{{ incident.description }}">
-                            {{ incident.description|truncatechars:500 }}
+                            {{ incident.description|truncatechars:200 }}
                         </span>
-                        {% if incident.description|length > 500 %}
+                        {% if incident.description|length > 200 %}
                             <button class="see-more-btn">See More</button>
                         {% endif %}
                     </div>
                 </div>
             </div>
 
-            <!--<div class="button-container">
-                <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
-                <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
-            </div>-->
+            <div class="button-container">
+            {% if incident.status != 'Completed' %}
+                {% if incident.assigned_to is None %}
+                <a href="{% url 'assign_volunteer' incident.id %}" class="delete-button">Assign Yourself</a>
+                {% else %}
+                <a href="{% url 'unassign_volunteer' incident.id %}" class="incident-button">Undo</a>
+                <a href="{% url 'complete_volunteer' incident.id %}" class="incident-button">Completed</a>
+                {% endif %}
+            {% endif %}
+            </div>
         </div>
         {% empty %}
         <p>No incidents to display.</p>

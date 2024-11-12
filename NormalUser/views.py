@@ -1,7 +1,8 @@
 from datetime import timedelta
 
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from Volunteer.models import Incident
@@ -22,3 +23,30 @@ def homepage(request):
 @login_required
 def about_us_volunteer(request):
     return render(request, 'about_us_vol.html')
+
+@login_required
+def assign_volunteer(request, id):
+    incident = get_object_or_404(Incident, id=id)
+    incident.assigned_to = request.user
+    incident.status = 'On Action'
+    incident.save()
+    return redirect('homepage_vol')
+
+@login_required
+def unassign_volunteer(request, id):
+    incident = get_object_or_404(Incident, id=id)
+    incident.assigned_to = None
+    incident.status = 'No Action'
+    incident.save()
+    return redirect('homepage_vol')
+
+@login_required
+def complete_volunteer(request, id):
+    incident = get_object_or_404(Incident, id=id)
+    incident.status = 'Completed'
+    incident.save()
+    return redirect('homepage_vol')
+
+def logout_volunteer(request):
+    logout(request)  # Log the user out
+    return redirect('login_page')

@@ -7,7 +7,7 @@
                 const fullText = descriptionText.getAttribute("data-full-text");
 
                 if (descriptionText.textContent === fullText) {
-                    descriptionText.textContent = fullText.slice(0, 500) + "...";
+                    descriptionText.textContent = fullText.slice(0, 200) + "...";
                     this.textContent = "See More";
                 } else {
                     descriptionText.textContent = fullText;
