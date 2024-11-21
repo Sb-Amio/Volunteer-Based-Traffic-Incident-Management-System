@@ -1,8 +1,7 @@
 {% extends 'common_vol.html' %}
 {% load static %}
 {% block content %}
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -69,10 +68,10 @@
             <div class="button-container">
             {% if incident.status != 'Completed' %}
                 {% if incident.assigned_to is None %}
-                <a href="{% url 'assign_volunteer' incident.id %}" class="delete-button">Assign Yourself</a>
+                <a href="{% url 'assign_volunteer' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">Assign Yourself</a>
                 {% else %}
-                <a href="{% url 'unassign_volunteer' incident.id %}" class="incident-button">Undo</a>
-                <a href="{% url 'complete_volunteer' incident.id %}" class="incident-button">Completed</a>
+                <a href="{% url 'unassign_volunteer' incident.id %}" class="btn btn-outline-primary" style="text-decoration: none;margin-right: 10px">Undo</a>
+                <a href="{% url 'complete_volunteer' incident.id %}" class="btn btn-outline-warning" style="text-decoration: none">Completed</a>
                 {% endif %}
             {% endif %}
             </div>
@@ -83,6 +82,4 @@
     </div>
 </body>
 </html>
-
-
 {% endblock %}s

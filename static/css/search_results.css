@@ -1,33 +1,80 @@
+/*body {*/
+/*    !*font-family: 'Arial', sans-serif;*!*/
+/*    !*margin: 0;*!*/
+/*    !*padding: 0;*!*/
+/*    !*background: linear-gradient(135deg, #ff7e5f, #feb47b);*!*/
+/*    !*color: #333;*!*/
+/*    !*display: flex;*!*/
+/*    !*justify-content: center;*!*/
+/*    align-items: center;*/
+/*    !*min-height: 100vh;*!*/
+/*}*/
 
-        /* You can move this to your CSS file */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .results-container {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+.results-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
 
-        .incident-card {
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #f9f9f9;
+h2 {
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 
-        }
+.incident-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        h2 {
-            margin-top: 0;
-        }
+.incident-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-        .no-results {
-            text-align: center;
-            font-size: 18px;
-            color: #666;
-        }
+.incident-card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.incident-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #ff7e5f;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.incident-card a:hover {
+    background: #feb47b;
+    transform: translateY(-3px);
+}
+
+.incident-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.no-results {
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+}

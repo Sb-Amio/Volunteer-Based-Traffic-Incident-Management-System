@@ -1,4 +1,4 @@
-{% extends 'common.html' %}
+{% extends 'common_vol.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title" style="padding-top: 10px;color: red">📌Action Required!📌</h1>
+        <h1 class="title" style="padding-top: 10px;color: black">My Involvements</h1>
         <!-- Loop over incidents -->
         {% for incident in inc %}
         <div class="incident-card">
@@ -35,9 +35,11 @@
 
                     <div class="incident-details">
                         <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
+                        <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
                         <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
                         <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
                     </div>
+
                     <div class="incident-description">
                         <strong>🔸 Description:</strong>
                         <span class="description-text" data-full-text="{{ incident.description }}">
@@ -51,8 +53,8 @@
             </div>
 
             <!--<div class="button-container">
-                <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
-                <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
+                <a href="{% url 'edit_incident' incident.id %}" class="btn btn-outline-primary" style="margin-right: 10px">Edit</a>
+                <a href="{% url 'delete_incident' incident.id %}" class="btn btn-outline-danger">Delete</a>
             </div>-->
         </div>
         {% empty %}
@@ -61,4 +63,4 @@
     </div>
 </body>
 </html>
-{% endblock %}s
+{% endblock %}

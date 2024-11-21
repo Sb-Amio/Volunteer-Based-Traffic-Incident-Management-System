@@ -42,9 +42,9 @@
                     <div class="incident-description">
                         <strong>🔸 Description:</strong>
                         <span class="description-text" data-full-text="{{ incident.description }}">
-                            {{ incident.description|truncatechars:500 }}
+                            {{ incident.description|truncatechars:200 }}
                         </span>
-                        {% if incident.description|length > 500 %}
+                        {% if incident.description|length > 200 %}
                             <button class="see-more-btn">See More</button>
                         {% endif %}
                     </div>

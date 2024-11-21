@@ -41,12 +41,17 @@ urlpatterns = [
     path('profile/', v_views.profile_view, name='profile'),
     path('event_details/<str:id>/', v_views.event_details, name='event_details'),
 
-    path('homepage_volunteer/', n_views.homepage,name='homepage_vol'),
+    path('homepage_volunteer/', n_views.homepage_volunteer,name='homepage_vol'),
     path('aboutus_volunteer/', n_views.about_us_volunteer, name='aboutus_vol'),
     path('assign_volunteer/<str:id>/', n_views.assign_volunteer, name='assign_volunteer'),
     path('unassign_volunteer/<str:id>/', n_views.unassign_volunteer, name='unassign_volunteer'),
     path('logout_volunteer/', n_views.logout_volunteer, name='logout_volunteer'),
     path('complete_volunteer/<str:id>/', n_views.complete_volunteer, name='complete_volunteer'),
+    path('search_vol/', n_views.search_events_volunteer, name='search_vol'),
+    path('event_details_vol/<str:id>', n_views.event_details_volunteer, name='event_details_vol'),
+    path('profile_volunteer/', n_views.profile_view_volunteer, name='profile_vol'),
+    path('my_involvements/', n_views.my_involvements, name='my_involvements'),
+
 
 
 ]

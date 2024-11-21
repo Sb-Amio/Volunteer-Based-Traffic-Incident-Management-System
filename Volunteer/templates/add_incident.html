@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/add_incident.css' %}">
-<div class="form-container">
+<div class="form-container" style="padding-top: 20px">
     <form action="" method="POST" enctype="multipart/form-data" class="form-card" onsubmit="return validateImage()">
         {% csrf_token %}
         <h2>Incident Information</h2>
@@ -28,8 +28,8 @@
             <p class="file-info">Allowed file types: .jpg, .jpeg, .png. Max size: 6 MB.</p>
         </div>
         <div class="button-container">
-            <a href="javascript:history.back()" class="btn-back">Back</a>
-            <input class="btn-submit" type="submit" name="Submit" value="Upload">
+            <a href="javascript:history.back()" class="btn btn-outline-primary" style="margin-right: 20px">Back</a>
+            <input class="btn btn-outline-success" type="submit" name="Submit" value="Upload">
         </div>
     </form>
 </div>
@@ -38,7 +38,7 @@
 function validateImage() {
     const fileInput = document.getElementById("id_image");
     const file = fileInput.files[0];
-    const maxSize = 6 * 1024 * 1024;  // 2 MB
+    const maxSize = 6 * 1024 * 1024;
 
     if (file) {
         const fileType = file.type;
