@@ -51,8 +51,8 @@ urlpatterns = [
     path('event_details_vol/<str:id>', n_views.event_details_volunteer, name='event_details_vol'),
     path('profile_volunteer/', n_views.profile_view_volunteer, name='profile_vol'),
     path('my_involvements/', n_views.my_involvements, name='my_involvements'),
-
-
-
+    path('on_action_volunteer/', n_views.on_action_volunteer, name='on_action_vol'),
+    path('no_action_volunteer/', n_views.no_action_volunteer, name='no_action_vol'),
+    path('completed_volunteer/', n_views.completed_volunteer, name='completed_vol'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

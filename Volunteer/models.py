@@ -19,7 +19,7 @@ class Incident(models.Model):
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, default= None,
                                     related_name='assigned_incidents')
     service_type = models.CharField(max_length=50,
-                                    choices=[('fire', 'Fire'), ('police', 'Police'), ('ambulance', 'Ambulance')],
+                                    choices=[('Fire', 'Fire'), ('Police', 'Police'), ('Ambulance', 'Ambulance')],
                                     default='police')
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 

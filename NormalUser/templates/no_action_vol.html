@@ -1,4 +1,4 @@
-{% extends 'common.html' %}
+{% extends 'common_vol.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -52,11 +52,17 @@
                 </div>
             </div>
             <div class="button-container">
-                <a href="{% url 'event_details' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">See Details</a>
+                <a href="{% url 'event_details_vol' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">See Details</a>
             </div>
             <!--<div class="button-container">
-                <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
-                <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>
+            {% if incident.status != 'Completed' %}
+                {% if incident.assigned_to is None %}
+                <a href="#" class="btn btn-outline-info" style="text-decoration: none;">Assign Yourself</a>
+                {% else %}
+                <a href="#" class="btn btn-outline-primary" style="text-decoration: none;margin-right: 10px">Undo</a>
+                <a href="#" class="btn btn-outline-warning" style="text-decoration: none">Completed</a>
+                {% endif %}
+            {% endif %}
             </div>-->
         </div>
         {% empty %}

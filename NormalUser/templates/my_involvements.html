@@ -37,7 +37,9 @@
                         <p><strong>🔸 Date Reported:</strong> {{ incident.date_reported }}</p>
                         <p><strong>🔸 Status:</strong> {{ incident.status }}</p>
                         <p><strong>🔸 Location:</strong> {{ incident.location }}</p>
+                        <p><strong>🔸 Service Required:</strong> {{ incident.service_type }}</p>
                         <p><strong>🔸 Reported By:</strong> {{ incident.reported_by }}</p>
+                        <p><strong>🔸 Assigned To:</strong> {{ incident.assigned_to }}</p>
                     </div>
 
                     <div class="incident-description">
@@ -51,7 +53,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="button-container">
+                <a href="{% url 'event_details_vol' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">See Details</a>
+            </div>
             <!--<div class="button-container">
                 <a href="{% url 'edit_incident' incident.id %}" class="btn btn-outline-primary" style="margin-right: 10px">Edit</a>
                 <a href="{% url 'delete_incident' incident.id %}" class="btn btn-outline-danger">Delete</a>

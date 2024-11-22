@@ -43,14 +43,19 @@
             <a href="javascript:history.back()" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left"></i> Go Back
             </a>
-            <!--<div class="actions">
-                <a href="{% url 'edit_incident' incident.id %}" class="btn btn-warning">
-                    <i class="fas fa-edit"></i> Edit Incident
-                </a>
-                <a href="{% url 'delete_incident' incident.id %}" class="btn btn-danger">
-                    <i class="fas fa-trash"></i> Delete Incident
-                </a>
-            </div>-->
+            <div class="button-container" style="margin-right: 770px">
+            {% if incident.status != 'Completed' %}
+                {% if incident.assigned_to is None %}
+                <a href="{% url 'assign_volunteer' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">Assign Yourself</a>
+                {% else %}
+                    {% if incident.assigned_to == request.user %}
+                        <a href="{% url 'unassign_volunteer' incident.id  %}" class="btn btn-outline-primary" style="text-decoration: none;margin-right: 10px">Undo</a>
+                        <a href="{% url 'complete_volunteer' incident.id %}" class="btn btn-outline-warning" style="text-decoration: none">Completed</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            </div>
+
         </div>
     </div>
 </div>

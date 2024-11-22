@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title" style="margin-top: 10px;">Incident List</h1>
+        <h1 class="title" style="margin-top: 10px; color: black">Incident List</h1>
 
         <!-- Loop over incidents -->
         {% for incident in incidents %}
@@ -64,7 +64,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="button-container">
+                <a href="{% url 'event_details' incident.id %}" class="btn btn-outline-info" style="text-decoration: none;">See Details</a>
+            </div>
             <!--<div class="button-container">
                 <a href="{% url 'edit_incident' incident.id %}" class="incident-button">Edit</a>
                 <a href="{% url 'delete_incident' incident.id %}" class="delete-button">Delete</a>

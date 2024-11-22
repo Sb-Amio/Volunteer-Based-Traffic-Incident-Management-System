@@ -31,7 +31,7 @@ def assign_volunteer(request, id):
     incident.assigned_to = request.user
     incident.status = 'On Action'
     incident.save()
-    return redirect('homepage_vol')
+    return redirect('on_action_vol')
 
 @login_required
 def unassign_volunteer(request, id):
@@ -39,14 +39,14 @@ def unassign_volunteer(request, id):
     incident.assigned_to = None
     incident.status = 'No Action'
     incident.save()
-    return redirect('homepage_vol')
+    return redirect('no_action_vol')
 
 @login_required
 def complete_volunteer(request, id):
     incident = get_object_or_404(Incident, id=id)
     incident.status = 'Completed'
     incident.save()
-    return redirect('homepage_vol')
+    return redirect('completed_vol')
 
 def logout_volunteer(request):
     logout(request)  # Log the user out
@@ -92,3 +92,20 @@ def my_involvements(request):
     inc = Incident.objects.filter(assigned_to=request.user).order_by('-date_reported')
     context = {'inc': inc}
     return render(request, template_name='my_involvements.html', context=context)
+
+@login_required
+def on_action_volunteer(request):
+    inc = Incident.objects.filter(status='On Action')
+    context = {'inc': inc}
+    return render(request, 'on_action_vol.html', context=context)
+@login_required
+def no_action_volunteer(request):
+    inc = Incident.objects.filter(status='No Action')
+    context = {'inc': inc}
+    return render(request, 'no_action_vol.html', context)
+
+@login_required
+def completed_volunteer(request):
+    inc = Incident.objects.filter(status='Completed')
+    context = {'inc': inc}
+    return render(request, 'complete_vol.html', context)
