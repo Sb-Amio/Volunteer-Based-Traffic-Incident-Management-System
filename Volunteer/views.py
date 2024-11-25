@@ -62,17 +62,17 @@ def my_events(request):
     return render(request, template_name='my_events.html', context=context)
 
 def onaction(request):
-    inc = Incident.objects.filter(status='On Action')
+    inc = Incident.objects.filter(status='On Action').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'onaction.html', context=context)
 
 def noaction(request):
-    inc = Incident.objects.filter(status='No Action')
+    inc = Incident.objects.filter(status='No Action').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'noaction.html', context)
 
 def completed(request):
-    inc = Incident.objects.filter(status='Completed')
+    inc = Incident.objects.filter(status='Completed').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'complete.html', context)
 

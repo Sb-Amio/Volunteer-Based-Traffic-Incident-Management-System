@@ -95,17 +95,17 @@ def my_involvements(request):
 
 @login_required
 def on_action_volunteer(request):
-    inc = Incident.objects.filter(status='On Action')
+    inc = Incident.objects.filter(status='On Action').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'on_action_vol.html', context=context)
 @login_required
 def no_action_volunteer(request):
-    inc = Incident.objects.filter(status='No Action')
+    inc = Incident.objects.filter(status='No Action').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'no_action_vol.html', context)
 
 @login_required
 def completed_volunteer(request):
-    inc = Incident.objects.filter(status='Completed')
+    inc = Incident.objects.filter(status='Completed').order_by('-date_reported')
     context = {'inc': inc}
     return render(request, 'complete_vol.html', context)
