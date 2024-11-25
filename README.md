@@ -25,7 +25,8 @@ Welcome to the **Volunteer-Based Traffic Incident Management System**! This proj
 1. Clone the repository:
    ```bash
    git clone https://github.com/Sb-Amio/Volunteer-Based-Traffic-Incident-Management-System.git
-   2. Navigate to the project directory:
+   
+2. Navigate to the project directory:
    - `cd Volunteer-Based-Traffic-Incident-Management-System`
 
 3. Install required dependencies:
