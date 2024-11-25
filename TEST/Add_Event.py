@@ -23,9 +23,11 @@ class TestUntitled():
         self.driver.get("http://127.0.0.1:8000/add_incident/")
         self.driver.set_window_size(934, 984)
         self.driver.find_element(By.ID, "id_title").click()
-        self.driver.find_element(By.ID, "id_title").send_keys("Hello Everyone")
+        self.driver.find_element(By.ID, "id_title").send_keys("Test")
         self.driver.find_element(By.ID, "id_description").click()
-        self.driver.find_element(By.ID, "id_description").send_keys("abcdabcd")
+        self.driver.find_element(By.ID, "id_description").click()
+        self.driver.find_element(By.ID, "id_description").send_keys(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
         self.driver.find_element(By.ID, "id_location").click()
         self.driver.find_element(By.ID, "id_location").send_keys("Farmgate, Dhaka")
         self.driver.find_element(By.ID, "id_service_type").click()
