@@ -103,7 +103,7 @@ def delete_incident(request, id):
     incident = Incident.objects.get(id=id)
     if request.method == 'POST':
         incident.delete()  # Delete the incident
-        return redirect('homepage')
+        return redirect('my_eventss')
     return render(request, template_name='confirm_delete.html')
 
 @login_required
