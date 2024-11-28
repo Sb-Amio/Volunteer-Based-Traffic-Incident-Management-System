@@ -18,7 +18,8 @@ def driver():
     ("NormalUser", "wrong", "abcdabcd", "abcdabcd"),
     ("Nrmal User", "21201201@uap-bd.edu", "abcdabcd", "abcdabcd"),
     ("NrmalUser", "21201201@uap-bd.edu", "abcdabc", "abcdabcd"),
-    ("Nrmal User", "wrong", "ww", "ww"),
+    ("NrmalUser", "21201201@uap-bd.edu", "ww", "ww"),
+    ("NrmalUser1", "21201201@uap-bd.edu", "abcdabcd", "abcdabcd"),
 ])
 def test_login(driver, username,em, password1, password2):
     driver.get("http://127.0.0.1:8000/signup/Volunteer/")

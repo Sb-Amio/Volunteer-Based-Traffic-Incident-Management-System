@@ -82,7 +82,7 @@ def selectMode(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
-@login_required
+
 def add_incident(request):
     form = IncidentForm()
     if request.method == 'POST':
