@@ -20,7 +20,7 @@ class Incident(models.Model):
                                     related_name='assigned_incidents')
     service_type = models.CharField(max_length=50,
                                     choices=[('Fire', 'Fire'), ('Police', 'Police'), ('Ambulance', 'Ambulance')],
-                                    default='police')
+                                    default='Police')
     image = models.ImageField(blank=True, null=True, upload_to='images/')
 
     def __str__(self):
