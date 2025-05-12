@@ -15,7 +15,7 @@ class Incident(models.Model):
     location = models.CharField(max_length=255)
     date_reported = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='No Action')
-    reported_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_incidents')
+    reported_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_incidents', default=None,null=True, blank=True)
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, default= None,
                                     related_name='assigned_incidents')
     service_type = models.CharField(max_length=50,

@@ -44,14 +44,14 @@ def sign_up(request, user_type):
 def logout_view(request):
     logout(request)  # Log the user out
     return redirect('login_page')  # Redirect to the login page after logout
-@login_required
+
 def homepage(request):
     incidents = Incident.objects.all().order_by('-date_reported')  # Order by newest first
     current_time = timezone.now()
     # Annotate each incident with 'is_new' flag
     for incident in incidents:
         time_difference = current_time - incident.date_reported
-        incident.is_new = time_difference <= timedelta(hours=1)  # Flag if within the last hour
+        incident.is_new = time_difference <= timedelta(hours=24)  # Flag if within the last hour
     context = {'incidents': incidents}
     return render(request, 'homepage.html', context=context)
 
@@ -82,7 +82,7 @@ def selectMode(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
-
+@login_required
 def add_incident(request):
     form = IncidentForm()
     if request.method == 'POST':
@@ -93,7 +93,7 @@ def add_incident(request):
             return redirect('homepage')
     else:
         # Set initial 'reported_by' field value for GET request (form display)
-        form = IncidentForm(initial={'reported_by': request.user.username})
+        form = IncidentForm(initial={'reported_by': None})
 
     context = {'form': form}
     return render(request, template_name='add_incident.html', context=context)
